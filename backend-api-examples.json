@@ -1,0 +1,73 @@
+{
+  "endpoints": {
+    "POST /api/applications": {
+      "description": "Yeni başvuru oluştur",
+      "request": {
+        "firstName": "Ahmet",
+        "lastName": "Yılmaz",
+        "phone": "05551234567",
+        "email": "ahmet@example.com",
+        "product": "Tarımsal Üretim Kredisi",
+        "timestamp": "2024-12-26T10:30:00.000Z",
+        "ip": "192.168.1.1"
+      },
+      "response": {
+        "success": true,
+        "message": "Başvuru başarıyla oluşturuldu",
+        "id": "app_1234567890",
+        "data": {
+          "firstName": "Ahmet",
+          "lastName": "Yılmaz",
+          "email": "ahmet@example.com",
+          "product": "Tarımsal Üretim Kredisi",
+          "status": "pending_verification"
+        }
+      }
+    },
+
+    "POST /api/sms/send-verification": {
+      "description": "SMS doğrulama kodu gönder",
+      "request": {
+        "phone": "05551234567",
+        "applicationId": "app_1234567890",
+        "firstName": "Ahmet"
+      },
+      "response": {
+        "success": true,
+        "message": "Doğrulama kodu gönderildi",
+        "expiresIn": 180
+      }
+    },
+
+    "POST /api/sms/verify": {
+      "description": "SMS doğrulama kodunu kontrol et",
+      "request": {
+        "applicationId": "app_1234567890",
+        "code": "123456"
+      },
+      "response": {
+        "success": true,
+        "message": "Doğrulama başarılı",
+        "applicationId": "app_1234567890"
+      }
+    },
+
+    "GET /api/applications/:id": {
+      "description": "Başvuru detayını getir",
+      "response": {
+        "success": true,
+        "data": {
+          "id": "app_1234567890",
+          "firstName": "Ahmet",
+          "lastName": "Yılmaz",
+          "phone": "05551234567",
+          "email": "ahmet@example.com",
+          "product": "Tarımsal Üretim Kredisi",
+          "status": "verified",
+          "createdAt": "2024-12-26T10:30:00.000Z",
+          "verifiedAt": "2024-12-26T10:35:00.000Z"
+        }
+      }
+    }
+  }
+}
